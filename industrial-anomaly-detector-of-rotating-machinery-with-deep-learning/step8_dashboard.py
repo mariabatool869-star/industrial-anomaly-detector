@@ -9,7 +9,9 @@ import os
 # --- 1. SETUP & CONFIGURATION ---
 st.set_page_config(page_title="AI Predictive Maintenance", layout="wide")
 
-RESULTS_DIR = "results"
+# Resolve paths from this script's folder (works locally and on Streamlit Cloud)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RESULTS_DIR = os.path.join(BASE_DIR, "results")
 TRAIN_DATA_PATH = os.path.join(RESULTS_DIR, "train_data.npy")
 TEST_DATA_PATH = os.path.join(RESULTS_DIR, "test_data.npy")
 MODEL_PATH = os.path.join(RESULTS_DIR, "lstm_autoencoder.pth")
@@ -42,7 +44,14 @@ class LSTMAutoencoder(nn.Module):
 @st.cache_data
 def load_data():
     if not os.path.exists(TRAIN_DATA_PATH) or not os.path.exists(TEST_DATA_PATH):
-        st.error("Data files not found. Please run Step 4 first.")
+        st.error(
+            "Data files not found. Expected:\n"
+            f"- `{TRAIN_DATA_PATH}`\n"
+            f"- `{TEST_DATA_PATH}`\n\n"
+            "On Streamlit Cloud, set the Main file path to "
+            "`industrial-anomaly-detector-of-rotating-machinery-with-deep-learning/step8_dashboard.py` "
+            "and ensure the `results/` folder is in the GitHub repo."
+        )
         return None, None
     train_data = np.load(TRAIN_DATA_PATH)
     test_data = np.load(TEST_DATA_PATH)
@@ -77,7 +86,8 @@ if train_data is not None:
     # Load Model
     if os.path.exists(MODEL_PATH):
         model = LSTMAutoencoder(INPUT_DIM, HIDDEN_DIM, SEQUENCE_LENGTH)
-        model.load_state_dict(torch.load(MODEL_PATH))
+        # map_location='cpu' is required on Streamlit Cloud (no GPU)
+        model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
         model.eval()
         
         # Calculate Anomaly Scores

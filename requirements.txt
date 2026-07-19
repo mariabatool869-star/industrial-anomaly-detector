@@ -1,0 +1,7 @@
+# Streamlit Cloud / dashboard dependencies (repo root)
+streamlit
+pandas
+numpy
+matplotlib
+torch
+scikit-learn
