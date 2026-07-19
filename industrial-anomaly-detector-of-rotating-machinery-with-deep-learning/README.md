@@ -5,6 +5,15 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B)
 ![Status](https://img.shields.io/badge/Status-Complete-success)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit%20App-FF4B4B?logo=streamlit&logoColor=white)](https://industrial-anomaly-detector-l7855mvgkgyckwgkincdgg.streamlit.app/)
+
+## 🌐 Live Demo
+
+Try the interactive predictive maintenance dashboard here:
+
+➡️ **[Open Live Demo](https://industrial-anomaly-detector-l7855mvgkgyckwgkincdgg.streamlit.app/)**
+
+---
 
 ## 📌 Executive Summary
 
@@ -807,13 +816,15 @@ Now comes the exciting part - let's see if our AI can detect the bearing failure
 
 For industrial applications, we need a real-time monitoring dashboard. This script creates a web interface using **Streamlit**.
 
+**Live Demo:** [https://industrial-anomaly-detector-l7855mvgkgyckwgkincdgg.streamlit.app/](https://industrial-anomaly-detector-l7855mvgkgyckwgkincdgg.streamlit.app/)
+
 **Features:**
 - Live visualization of machine health
 - Adjustable sensitivity slider
 - Color-coded alerts (Green = Healthy, Red = Critical)
 - Raw sensor data inspection
 
-**How to run it:**
+**How to run it locally:**
 ```bash
 streamlit run step8_dashboard.py
 ```
